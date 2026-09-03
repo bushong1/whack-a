@@ -1,76 +1,34 @@
-# Old man yells at stuff
+# Whack-a-mole emoji
 
-Use this tool to make Abe Simpson yell at stuff!
+Create a 128x128 whack-a-? emoji from any PNG.
 
-This is the perfect toolkit to improve your slack emoji game.
+Install the CLI with Go:
 
-## Repository
-
-Check out the [repository](./repository/) for some pre-baked yelling!
-There are over 500 yellings to choose from!
-
-## Browser Version
-
-Visit [oncilla.github.io/old-man-yells-at/](https://oncilla.github.io/old-man-yells-at/) and let Abe yell at stuff from the comfort of your browser!
-All the code is executed locally in your browser and the image does not leave your machine.
-
-## CLI Installation
-
-We provide statically built binaries of the CLI on our [GitHub releases](https://github.com/oncilla/old-man-yells-at/releases).
-Download the appropriate bundle for your platform from the assets and run it locally.
-
-If you have the Go toolchain installed, you can also simply install the CLI by running the following command:
-
-```
-go install github.com/oncilla/old-man-yells-at/cmd/old-man-yells-at@latest
+```sh
+go install github.com/bushong1/whack-a/cmd/whack-a@latest
 ```
 
-## Usage
+Or build it from a local checkout:
 
-```
-Enjoy Abe yelling at stuff!
-
-Provide a target image and Abe Simpson will yell at.
-
-By default, the resulting image is created in the current working directory
-as 'old-man-yells-at-<target-basename>.png'. If Abe should redirect his yelling,
-you have the following options:
-
-  - <filename>.png: Create image at the specified filename.
-  - png: Create image at 'old-man-yells-at-<target-basename>.png'.
-  - hex: Write image hex-encoded to stdout.
-  - b64: Write image b64-encoded to stdout.
-
-Usage:
-  old-man-yells-at <target-file> [flags]
-  old-man-yells-at [command]
-
-Available Commands:
-  completion  Generates shell completion scripts
-  help        Help about any command
-  version     Show the version information
-
-Flags:
-  -h, --help            help for old-man-yells-at
-  -o, --output string   [png, b64, hex, <filename>.png] (default "png")
-
-Use "old-man-yells-at [command] --help" for more information about a command.
+```sh
+go build -o ./bin/whack-a ./cmd/whack-a
+./bin/whack-a --left-hidden-pct 20 --right-exposed-pct 20 my-emoji.png
+# Equivalent short form:
+./whack-a -l 20 -r 20 my-emoji.png
 ```
 
-## Examples
+The command writes `whack-a-my-emoji.png` in the current directory. The input
+is antialiased to 45 pixels wide without changing its aspect ratio. The left
+reveal area can extend from `y=27` to `y=112`, while its visible bottom always
+remains at `y=111`.
+By default, the lower 20% of that left copy is hidden behind its hole, and the
+upper 20% grows upward from `(74, 112)` on the right. Both percentages accept
+values from 0 through 100. Both portions are bottom-aligned to `y=111` and can
+grow upward to the 85px reveal cap.
 
-<img src="./testdata/old-man-yells-at-bazel.png" width=50 >
+`fig/whack-a-blank.png` is the embedded template and `whack-a-mole.png` is an
+example output.
 
-<img src="./testdata/old-man-yells-at-vscode.png" width=50 >
+## Credit
 
-## Origin
-
-[The Simpsons](https://youtu.be/tJ-LivK4-78)
-
-## Contribute
-
-To regenerate the webassembly bundle, run the following:
-
-```txt
-GOOS=js GOARCH=wasm go build -o ./docs/yell-at.wasm ./cmd/wasm/
-```
+This project was refactored from [oncilla/old-man-yells-at](https://github.com/oncilla/old-man-yells-at), the original Abe Simpson emoji generator.

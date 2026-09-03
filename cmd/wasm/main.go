@@ -1,3 +1,4 @@
+// Modified in 2026 from the original old-man-yells-at for whack-a purposes.
 //go:build js && wasm
 
 package main
@@ -13,7 +14,7 @@ import (
 	"strings"
 	"syscall/js"
 
-	yeller "github.com/oncilla/old-man-yells-at"
+	whacka "github.com/bushong1/whack-a"
 )
 
 func newError(err error) any {
@@ -22,8 +23,8 @@ func newError(err error) any {
 	}
 }
 
-func yellerWrapper() js.Func {
-	yellerFunc := js.FuncOf(func(this js.Value, args []js.Value) any {
+func whackAWrapper() js.Func {
+	whackAFunc := js.FuncOf(func(this js.Value, args []js.Value) any {
 		if len(args) != 1 {
 			return newError(fmt.Errorf("expected 1 argument, got %d", len(args)))
 		}
@@ -39,11 +40,11 @@ func yellerWrapper() js.Func {
 			return newError(fmt.Errorf("decoding image: %w", err))
 		}
 
-		yelledAt := yeller.YellAt(im)
+		whacked := whacka.WhackA(im)
 
 		var buf bytes.Buffer
 		enc := base64.NewEncoder(base64.StdEncoding, &buf)
-		if err := png.Encode(enc, yelledAt); err != nil {
+		if err := png.Encode(enc, whacked); err != nil {
 			return newError(fmt.Errorf("encoding image: %w", err))
 		}
 		if err := enc.Close(); err != nil {
@@ -54,10 +55,10 @@ func yellerWrapper() js.Func {
 			"result": buf.String(),
 		}
 	})
-	return yellerFunc
+	return whackAFunc
 }
 
 func main() {
-	js.Global().Set("yellAt", yellerWrapper())
+	js.Global().Set("whackA", whackAWrapper())
 	<-make(chan bool)
 }

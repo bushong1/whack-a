@@ -1,3 +1,4 @@
+// Modified in 2026 from the original old-man-yells-at for whack-a purposes.
 // Copyright 2021 oncilla
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +30,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	yeller "github.com/oncilla/old-man-yells-at"
+	whacka "github.com/bushong1/whack-a"
 	"go.uber.org/zap"
 )
 
@@ -65,7 +66,7 @@ func (s *Server) Upload(w http.ResponseWriter, r *http.Request) {
 		}
 
 		var b bytes.Buffer
-		if err := png.Encode(&b, yeller.YellAt(mm)); err != nil {
+		if err := png.Encode(&b, whacka.WhackA(mm)); err != nil {
 			fmt.Println(err)
 			return
 		}
@@ -89,7 +90,7 @@ func (s *Server) Upload(w http.ResponseWriter, r *http.Request) {
 			<head>
 			</head>
 			<body>
-			<img src="image/%s/old-man-yells-at-%s.png">
+			<img src="image/%s/whack-a-%s.png">
 			</body>
 			</html>
 			`, m.UUID, m.Name),

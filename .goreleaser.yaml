@@ -11,7 +11,7 @@ builds:
     ignore:
       - goos: windows
         goarch: "386"
-    main: ./cmd/old-man-yells-at
+    main: ./cmd/whack-a
 
 archives:
   - format: tar.gz

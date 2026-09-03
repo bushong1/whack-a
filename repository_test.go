@@ -1,3 +1,4 @@
+// Modified in 2026 from the original old-man-yells-at for whack-a purposes.
 // Copyright 2023 oncilla
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package yeller_test
+package whacka_test
 
 import (
 	"bytes"
@@ -24,7 +25,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	yeller "github.com/oncilla/old-man-yells-at"
+	whacka "github.com/bushong1/whack-a"
 	"github.com/stretchr/testify/require"
 )
 
@@ -63,12 +64,12 @@ func TestCreateRepository(t *testing.T) {
 			require.NoError(t, err)
 			target, err := png.Decode(bytes.NewReader(raw))
 			require.NoError(t, err)
-			yelledAt := yeller.YellAt(target)
+			whacked := whacka.WhackA(target)
 
 			var buf bytes.Buffer
-			require.NoError(t, png.Encode(&buf, yelledAt))
+			require.NoError(t, png.Encode(&buf, whacked))
 
-			out := filepath.Join("repository", "old-man-yells-at-"+emoji.Name+".png")
+			out := filepath.Join("repository", "whack-a-"+emoji.Name+".png")
 			require.NoError(t, os.WriteFile(out, buf.Bytes(), 0666))
 		})
 	}

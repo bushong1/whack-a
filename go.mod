@@ -1,4 +1,4 @@
-module github.com/oncilla/old-man-yells-at
+module github.com/bushong1/whack-a
 
 go 1.25
 

@@ -1,3 +1,4 @@
+// Modified in 2026 from the original old-man-yells-at for whack-a purposes.
 // Copyright 2021 oncilla
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +21,7 @@ import (
 
 	"github.com/dgraph-io/ristretto"
 	"github.com/google/uuid"
-	"github.com/oncilla/old-man-yells-at/server"
+	"github.com/bushong1/whack-a/server"
 )
 
 // Store is a sqlite backed implementation of the store interface.
